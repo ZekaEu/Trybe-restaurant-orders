@@ -14,7 +14,6 @@ def file_check(path):
 def get_maria_favorite_dish(list):
     dish_dict = {order[1] for order in list}
     order_count = {dish: 0 for dish in dish_dict}
-
     for client, dish, weekday in list:
         if client == "maria":
             order_count[dish] += 1

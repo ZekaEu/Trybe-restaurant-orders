@@ -1,13 +1,23 @@
+from collections import Counter
+
+
 class TrackOrders:
-    # aqui deve expor a quantidade de estoque
+    def __init__(self):
+        self.orders = []
+
     def __len__(self):
-        pass
+        return len(self.orders)
 
     def add_new_order(self, customer, order, day):
-        pass
+        new_order = (customer, order, day)
+        self.orders.append(new_order)
 
     def get_most_ordered_dish_per_customer(self, customer):
-        pass
+        order_count = {order[1]: 0 for order in self.orders}
+        for client, dish, _ in self.orders:
+            if client == customer:
+                order_count[dish] += 1
+        return max(order_count, key=order_count.get)
 
     def get_never_ordered_per_customer(self, customer):
         pass
@@ -16,7 +26,7 @@ class TrackOrders:
         pass
 
     def get_busiest_day(self):
-        pass
+        return Counter([ordr[2] for ordr in self.orders]).most_common(1)[0][0]
 
     def get_least_busy_day(self):
-        pass
+        return Counter([ordr[2] for ordr in self.orders]).most_common()[-1][0]
